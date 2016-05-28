@@ -1,0 +1,49 @@
+{
+  "groups": [
+    {
+      "id": "PB-1",
+      "alumns": [
+        {
+          "name": "Emilio Cobos Álvarez",
+          "id": "70912324-N",
+          "avatarUrl": "THIS SHOULD BE FILLED WITH REAL DATA"
+        },
+        {
+          "name": "Johny Drop Tables",
+          "id": "5555555-T"
+        }
+      ]
+    },
+    {
+      "id": "PB-2",
+      "alumns": [
+        {
+          "name": "Cristina Pérez",
+          "id": "34444343-N"
+        },
+        {
+          "name": "Juan Luis Alberto",
+          "id": "43434040-L"
+        }
+      ]
+    },
+    {
+      "id": "PB-3",
+      "alumns": [
+        {
+          "name": "Juan Carlos Pardo",
+          "id": "90659993-S"
+        },
+        {
+          "name": "Carla Gómez Sánchez",
+          "id": "43534534-P",
+          "wantedGroupId": "PB-5"
+        },
+        {
+          "name": "Manuela Tándem Jaque",
+          "id": "54350030-P"
+        }
+      ]
+    }
+  ]
+}

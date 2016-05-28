@@ -1,29 +1,21 @@
 {
-  "name": "react-es6-webpack-boilerplate",
-  "version": "4.0.0",
-  "description": "Boilerplate for kick starting a React Project with ES6 (Babel) and Hot reloader using Webpack.",
+  "name": "group-sort",
+  "version": "1.0.0",
+  "description": "IPO project",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.production.js",
+    "build": "BABEL_ENV=production ./node_modules/.bin/webpack",
     "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vasanthk/react-es6-webpack-boilerplate.git"
+    "url": "https://github.com/emilio/ipo-final.git"
   },
   "keywords": [
-    "react",
-    "es6",
-    "babel",
-    "webpack"
   ],
-  "author": "Vasanth Krishnamoorthy (http://www.vasanthk.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vasanthk/react-es6-webpack-boilerplate/issues"
-  },
-  "homepage": "https://github.com/vasanthk/react-es6-webpack-boilerplate",
+  "author": "Emilio Cobos Álvarez (https://emiliocobos.me)",
+  "license": "GPLv3",
   "dependencies": {
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
@@ -41,6 +33,12 @@
     "eslint": "^0.21.2",
     "eslint-plugin-react": "^2.3.0",
     "react-transform-hmr": "^1.0.1",
+    "node-sass": "^3.7.0",
+    "css-loader": "^0.23.0",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "postcss-loader": "^0.9.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "webpack": "^1.8.4",
     "webpack-dev-server": "^1.8.0"
   }

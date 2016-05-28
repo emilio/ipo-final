@@ -41,34 +41,53 @@
  */
 
 /* eslint-disable no-var */
-var webpack = require('webpack');
-var path = require('path');
+const autoprefixer = require('autoprefixer')
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+const sassLoaders = [
+  'css-loader',
+  'postcss-loader',
+  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, './src')
+]
+
 
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:5000',
     'webpack/hot/dev-server',
-    './scripts/index'
+    './src/index'
   ],
   output: {
-    path: __dirname,
+    path: path.join(__dirname, './build'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static'
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.sass'],
+    root: [path.join(__dirname, './src')]
   },
   devtool: 'eval-source-map',
   plugins: [
+    new ExtractTextPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
+  ],
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions']
+    })
   ],
   module: {
     loaders: [
       {
+        test: /\.sass$/,
+        loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!')),
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'scripts')
+        include: path.join(__dirname, 'src')
       }
     ]
   }
