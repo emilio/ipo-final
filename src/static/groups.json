@@ -1,0 +1,13 @@
+{
+  "groups": [
+    {
+      "id": "PB-1",
+      "alumns": [
+        {
+          "name": "Emilio Cobos Álvarez",
+          "avatarUrl": "THIS SHOULD BE FILLED WITH REAL DATA"
+        }
+      ]
+    }
+  ]
+}
