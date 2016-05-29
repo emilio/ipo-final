@@ -91,12 +91,10 @@ Alumn.propTypes = {
  */
 const alumnSource = {
   beginDrag(props) {
-    window.SCROLLING_DISABLED = true;
     return props;
   },
 
   endDrag(props, monitor) {
-    window.SCROLLING_DISABLED = false;
     if (!monitor.didDrop())
       return;
 

@@ -22,28 +22,6 @@ class Footer extends Component {
   }
 }
 
-// Maybe disable scroll.
-//
-// This is enabled when we're dragging an alumn,
-// to prevent janky behaviour on mobile browsers.
-//
-// See beginDrag() and endDrag() in Alumn.js
-//
-// This is a hack that should be done by the back-end
-// but anyway...
-if (window.Modernizr && window.Modernizr.touchevents) {
-  let preventDefaultIfDisabled = function(e) {
-    if (window.SCROLLING_DISABLED)
-      e.preventDefault();
-  };
-
-  let events = ["touchstart", "touchend", "touchmove", "mousemove"];
-  events.forEach(name => {
-    window.addEventListener(name, preventDefaultIfDisabled, false);
-    document.body.addEventListener(name, preventDefaultIfDisabled, false);
-  })
-}
-
 export default class App extends Component {
   render() {
     return (
