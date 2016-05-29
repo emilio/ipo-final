@@ -1,0 +1,47 @@
+@import 'vars'
+
+.group
+  margin: 1em
+  width: 250px
+  background-color: #dadada
+  border: 1px solid #bcbcbc
+  box-shadow: 0 0 2px #ccc
+  border-radius: 3px 3px 0 0
+
+.group-header
+  background: white
+  margin: 0
+  padding: .5em .7em
+  border-radius: 3px 3px 0 0
+  overflow: hidden
+
+.group-alumn-count
+  float: right
+  font-size: 1em
+  display: inline-block
+  background: #777
+  color: white
+  font-weight: bold
+  border-radius: 15px
+  padding: .3em 1em
+
+  .group-alumn-count-separator
+    &::before
+      content: " / "
+
+  &[data-filtered=false]
+    .group-alumn-count-filtered,
+    .group-alumn-count-separator
+      display: none
+  &[data-filtered=true]
+    .group-alumn-count-total,
+    .group-alumn-count-separator
+      opacity: .7
+  &[data-filtered-count="0"]
+    background-color: $soft-red
+  &[data-total-count="0"]
+    background-color: #f00
+
+.group-title
+  font-size: 1.4em
+  margin: 0

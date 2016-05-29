@@ -37,11 +37,12 @@
         {
           "name": "Carla Gómez Sánchez",
           "id": "43534534-P",
-          "wantedGroupId": "PB-5"
+          "wantedGroupId": "PB-2"
         },
         {
           "name": "Manuela Tándem Jaque",
-          "id": "54350030-P"
+          "id": "54350030-P",
+          "wantedGroupId": "PB-3"
         }
       ]
     }

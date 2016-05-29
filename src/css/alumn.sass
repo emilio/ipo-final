@@ -1,0 +1,66 @@
+@import 'vars'
+$avatar-width: 35px
+
+.alumn
+  background-repeat: no-repeat
+  background-position: top center
+  border-radius: 4px
+  overflow: hidden
+  padding: .5em
+  background-color: white
+  color: #555
+  margin: .5em
+  position: relative
+
+.alumn-avatar
+  width: $avatar-width
+  height: $avatar-width
+  border-radius: $avatar-width / 2
+  float: left
+  margin-right: .5em
+
+.alumn-name
+  font-size: 1.1em
+  margin: 0
+  margin-top: 0em
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+.alumn-id
+  color: #a0a0a0
+
+
+.alumn-state
+  position: absolute
+  bottom: .5em
+  right: .5em
+
+.alumn-state::before
+  content: attr(data-wanted)
+  display: block
+  position: absolute
+  bottom: 0
+  background: rgba(black, .80)
+  color: white
+  padding: .3em .5em
+  border-radius: 3px
+  right: -.5em
+  opacity: 0
+  pointer-events: none
+
+.alumn-state:hover::before
+  opacity: 1
+  bottom: 110%
+  transition: opacity .3s ease, bottom .3s ease
+
+.alumn-state--unassigned,
+.alumn-state--assigned
+  width: 10px
+  height: 10px
+  border-radius: 5px
+  display: block
+.alumn-state--unassigned
+  background: $soft-red
+.alumn-state--assigned
+  background: $soft-green

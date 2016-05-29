@@ -1,0 +1,29 @@
+@import 'vars'
+
+.group-list
+  max-width: 1300px
+  margin: 0 auto
+
+.group-list-groups
+  overflow: hidden
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-contents: space-around
+  align-items: stretch
+
+.group-list-searcher
+  display: block
+  margin-left: 1em
+  -moz-appearance: none
+  appearance: none
+  border: 2px solid $soft-blue
+  border-radius: 1em
+  line-height: 1
+  padding: .5em 1em
+  max-width: 100%
+  width: 15em
+  transition: width .3s ease
+
+  &:focus
+    width: 20em

@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,700,700italic);
 
+*,
+*::before,
+*::after
+  box-sizing: border-box
+
 html, body
   font-family: 'Fira Sans', sans-serif
   margin: 0
@@ -7,101 +12,7 @@ html, body
   font-size: 13px
   color: #333
 
-.group-list-groups
-  // TODO: use flexbox or whatnot?
-  overflow: hidden
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  justify-contents: space-around
-  align-items: stretch
-
-.group
+.site-footer
   margin: 1em
-  display: box
-  width: 250px
-  background-color: #dadada
-  border: 1px solid #bcbcbc
-  box-shadow: 0 0 2px #ccc
-  border-radius: 3px 3px 0 0
-
-.group-header
-  background: white
-  margin: 0
-  padding: .5em .7em
-  border-radius: 3px 3px 0 0
-  overflow: hidden
-
-$soft-red: #ce4c4c
-
-.group-alumn-count
-  float: right
-  font-size: 1em
-  display: inline-block
-  background: #777
-  color: white
-  font-weight: bold
-  border-radius: 15px
-  padding: .3em 1em
-
-  .group-alumn-count-separator
-    &::before
-      content: " / "
-
-  &[data-filtered=false]
-    .group-alumn-count-filtered,
-    .group-alumn-count-separator
-      display: none
-  &[data-filtered=true]
-    .group-alumn-count-total,
-    .group-alumn-count-separator
-      opacity: .7
-  &[data-filtered-count="0"]
-    background-color: $soft-red
-  &[data-total-count="0"]
-    background-color: #f00
-
-.group-title
-  font-size: 1.4em
-  margin: 0
-
-$avatar-width: 35px
-
-.alumn
-  background-repeat: no-repeat
-  background-position: top center
-  border-radius: 4px
-  overflow: hidden
-  padding: .5em
-  background-color: white
-  color: #555
-  margin: .5em
-  position: relative
-
-  .alumn-avatar
-    width: $avatar-width
-    height: $avatar-width
-    border-radius: $avatar-width / 2
-    float: left
-    margin-right: .5em
-
-  .alumn-name
-    font-size: 1.1em
-    margin: 0
-    margin-top: 0em
-    white-space: nowrap
-    overflow: hidden
-    text-overflow: ellipsis
-  .alumn-id
-    color: #a0a0a0
-
-  .alumn-state--unassigned
-    position: absolute
-    bottom: .5em
-    right: .5em
-    width: 10px
-    height: 10px
-    border-radius: 5px
-    background: $soft-red
-    display: block
-
+  padding: 10px
+  border-top: 1px solid #444
