@@ -59,19 +59,20 @@ class Alumn extends Component {
     const { name,
             id,
             connectDragSource,
+            connectDragPreview,
             isDragging,
             groupId,
             wantedGroupId } = this.props;
 
     let extraClassName = isDragging ? "alumn--dragging" : "";
-    return connectDragSource(
+    return connectDragPreview(connectDragSource(
       <div className={"alumn " + extraClassName}>
         <img src={imageUrl} className="alumn-avatar" />
         <h3 className="alumn-name">{name}</h3>
         <span className="alumn-id">{id}</span>
         <AlumnState wanted={wantedGroupId} current={groupId} />
       </div>
-    );
+    ));
   }
 }
 
@@ -81,6 +82,7 @@ Alumn.propTypes = {
   groupId: PropTypes.any.isRequired,
   wantedGroupId: PropTypes.any,
   connectDragSource: PropTypes.func.isRequired,
+  connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired
 }
 
@@ -89,10 +91,12 @@ Alumn.propTypes = {
  */
 const alumnSource = {
   beginDrag(props) {
+    window.SCROLLING_DISABLED = true;
     return props;
   },
 
   endDrag(props, monitor) {
+    window.SCROLLING_DISABLED = false;
     if (!monitor.didDrop())
       return;
 
@@ -105,7 +109,8 @@ const alumnSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging(),
   }
 }
 

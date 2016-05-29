@@ -43,8 +43,9 @@
 /* eslint-disable no-var */
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 const sassLoaders = [
   'css-loader',
   'postcss-loader',
@@ -69,6 +70,13 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   plugins: [
+    new ModernizrWebpackPlugin({
+      options: ['setClasses'],
+      'feature-detects': [
+        'input',
+        'touchevents'
+      ]
+    }),
     new ExtractTextPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()

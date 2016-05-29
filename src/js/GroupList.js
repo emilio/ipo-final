@@ -3,7 +3,9 @@ import Group from './Group';
 import GroupManager from './GroupManager';
 import 'css/group-list';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import Html5Backend from 'react-dnd-html5-backend';
+import TouchBackend from 'react-dnd-touch-backend';
+import AlumnPreview from './DragLayer';
 
 /**
  * This class represent a list of groups, and has the hability
@@ -66,9 +68,14 @@ class GroupList extends Component {
         <div className="group-list-groups">
           {groups}
         </div>
+        <AlumnPreview />
       </div>
     );
   }
 }
 
-export default DragDropContext(HTML5Backend)(GroupList);
+let selectedBackend = Html5Backend;
+if (window.Modernizr && window.Modernizr.touchevents)
+  selectedBackend = TouchBackend({ enableMouseEvents: true });
+
+export default DragDropContext(selectedBackend)(GroupList);
