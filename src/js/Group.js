@@ -32,8 +32,12 @@ class Group extends Component {
       filtered = filteredCount != totalCount;
     }
 
+    let canDrop = this.props.canDrop;
+    let isOver = this.props.isOver;
+    let extraClassName = canDrop && isOver ? "group--droppable" : "";
+
     return this.props.connectDropTarget(
-      <div className="group">
+      <div className={"group " + extraClassName}>
         <header className="group-header">
           <span className="group-alumn-count"
                 data-filtered={filtered}

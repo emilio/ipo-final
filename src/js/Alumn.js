@@ -63,8 +63,9 @@ class Alumn extends Component {
             groupId,
             wantedGroupId } = this.props;
 
+    let extraClassName = isDragging ? "alumn--dragging" : "";
     return connectDragSource(
-      <div className="alumn">
+      <div className={"alumn " + extraClassName}>
         <img src={imageUrl} className="alumn-avatar" />
         <h3 className="alumn-name">{name}</h3>
         <span className="alumn-id">{id}</span>

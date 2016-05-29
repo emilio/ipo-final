@@ -11,6 +11,18 @@ $avatar-width: 35px
   color: #555
   margin: .5em
   position: relative
+  cursor: grab
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease
+  box-shadow: 0 0 0 transparent
+
+  &:hover
+    transform: scale(1.03)
+    box-shadow: 0 0 5px #999
+
+  &.alumn--dragging
+    opacity: .8
+    transform: scale(1)
+    box-shadow: 0 0 0 transparent
 
 .alumn-avatar
   width: $avatar-width
@@ -56,9 +68,9 @@ $avatar-width: 35px
 
 .alumn-state--unassigned,
 .alumn-state--assigned
-  width: 10px
-  height: 10px
-  border-radius: 5px
+  width: 15px
+  height: 15px
+  border-radius: 8px
   display: block
 .alumn-state--unassigned
   background: $soft-red
