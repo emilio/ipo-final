@@ -30,7 +30,6 @@ class GroupList extends Component {
 
   componentDidMount() {
     GroupManager.onChange(groups => {
-      console.log("onChange", groups);
       this.setState({
         groups: groups,
         searchQuery: this.state.searchQuery,

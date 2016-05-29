@@ -32,8 +32,6 @@ class Group extends Component {
       filtered = filteredCount != totalCount;
     }
 
-    console.log("canDrop: " + this.props.canDrop + ", isOver: " + this.props.isOver);
-
     return this.props.connectDropTarget(
       <div className="group">
         <header className="group-header">

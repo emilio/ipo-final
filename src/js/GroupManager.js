@@ -29,7 +29,6 @@ let GroupManager = {
       return false;
 
     let new_group = GROUPS.find(g => g.id === toGroup);
-    console.log(new_group);
     if (!new_group)
       return false;
 
