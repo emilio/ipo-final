@@ -22,6 +22,24 @@ class Footer extends Component {
   }
 }
 
+// Enhancement, use the ESC key to cancel searches.
+//
+// Only doable via window.dispatchEvent, so we won't do anything if that API is
+// not available, instead of breaking.
+if (window.dispatchEvent) {
+  document.addEventListener("keypress", function(e) {
+    if (e.keyCode === 27) { // ESC
+      let event = new Event("input", { bubbles: true });
+      [].slice.call(document.getElementsByTagName('input')).forEach(elem => {
+        if (elem.type === "text" && "oninput" in elem) {
+          elem.value = "";
+          elem.dispatchEvent(event);
+        }
+      })
+    }
+  })
+}
+
 export default class App extends Component {
   render() {
     return (
