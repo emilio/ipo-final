@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import Group from './Group';
+import GroupManager from './GroupManager';
 import 'css/group-list';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 /**
  * This class represent a list of groups, and has the hability
  * to filter alumns when a query arrives.
  */
-export default class GroupList extends Component {
+class GroupList extends Component {
   constructor() {
     super()
     this.state = {
@@ -26,10 +29,16 @@ export default class GroupList extends Component {
   }
 
   componentDidMount() {
-    fetch(this.props.url)
-      .then(response => response.json())
-      .then(groups => this.setState(groups))
-      .catch(err => console.error(err));
+    GroupManager.onChange(groups => {
+      console.log("onChange", groups);
+      this.setState({
+        groups: groups,
+        searchQuery: this.state.searchQuery,
+      })
+    })
+    // TODO: does this.props.url make any sense now
+    // GroupManager is a singleton? Probably not but huh...
+    GroupManager.init(this.props.url);
   }
 
   render() {
@@ -63,3 +72,4 @@ export default class GroupList extends Component {
   }
 }
 
+export default DragDropContext(HTML5Backend)(GroupList);

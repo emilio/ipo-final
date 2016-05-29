@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import GroupManager from './GroupManager';
 import 'css/alumn';
+import { DragSource } from 'react-dnd';
 
 const AVATAR_WIDTH_PX = 125;
 
@@ -24,6 +26,11 @@ class AlumnState extends Component {
   }
 }
 
+AlumnState.propTypes = {
+  wanted: PropTypes.any,
+  current: PropTypes.any.isRequired
+}
+
 /**
  * The state of the alumn is dead simple.
  *
@@ -39,7 +46,7 @@ class AlumnState extends Component {
  * We obtain the group from the parent, and the wantedGroup from the data, so
  * it's trivial to determine the state.
  */
-export default class Alumn extends Component {
+class Alumn extends Component {
   constructor() {
     super();
   }
@@ -49,14 +56,56 @@ export default class Alumn extends Component {
     // use this.props.imageUrl
     let imageUrl = "https://api.adorable.io/avatars/" + AVATAR_WIDTH_PX + "/" + encodeURIComponent(this.props.name);
 
-    return (
+    const { name,
+            id,
+            connectDragSource,
+            isDragging,
+            groupId,
+            wantedGroupId } = this.props;
+
+    return connectDragSource(
       <div className="alumn">
         <img src={imageUrl} className="alumn-avatar" />
-        <h3 className="alumn-name">{this.props.name}</h3>
-        <span className="alumn-id">{this.props.id}</span>
-        <AlumnState wanted={this.props.wantedGroupId} current={this.props.groupId} />
+        <h3 className="alumn-name">{name}</h3>
+        <span className="alumn-id">{id}</span>
+        <AlumnState wanted={wantedGroupId} current={groupId} />
       </div>
     );
   }
 }
 
+Alumn.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  groupId: PropTypes.any.isRequired,
+  wantedGroupId: PropTypes.any,
+  connectDragSource: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool.isRequired
+}
+
+/**
+ * Drag and Drop interaction
+ */
+const alumnSource = {
+  beginDrag(props) {
+    return props;
+  },
+
+  endDrag(props, monitor) {
+    if (!monitor.didDrop())
+      return;
+
+    let result = monitor.getDropResult();
+    if (result && result.movedTo)
+      GroupManager.moveAlumn(props, result.movedTo);
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+export default DragSource("ALUMN", alumnSource, collect)(Alumn);

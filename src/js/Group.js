@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import GroupManager from './GroupManager';
 import Alumn from './Alumn';
 import 'css/group';
+import { DropTarget } from 'react-dnd';
 
 /**
  * This represents a group with their its alumns.
@@ -8,7 +10,7 @@ import 'css/group';
  * It has some alumns, potentially filtered, and just takes
  * care of storing them and rendering them appropiately.
  */
-export default class Group extends Component {
+class Group extends Component {
   constructor() {
     super();
   }
@@ -30,7 +32,9 @@ export default class Group extends Component {
       filtered = filteredCount != totalCount;
     }
 
-    return (
+    console.log("canDrop: " + this.props.canDrop + ", isOver: " + this.props.isOver);
+
+    return this.props.connectDropTarget(
       <div className="group">
         <header className="group-header">
           <span className="group-alumn-count"
@@ -51,3 +55,33 @@ export default class Group extends Component {
   }
 }
 
+Group.propTypes = {
+  id: PropTypes.any.isRequired,
+  alumns: PropTypes.array.isRequired,
+  unfilteredAlumns: PropTypes.array,
+  connectDropTarget: PropTypes.func.isRequired,
+  isOver: PropTypes.bool.isRequired,
+  canDrop: PropTypes.bool.isRequired
+};
+
+const groupTarget = {
+  canDrop(props, monitor) {
+    // TODO: validate something like max group size?
+    return props.id != monitor.getItem().groupId;
+  },
+
+  drop(props, monitor) {
+    return { movedTo: props.id }
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
+  };
+}
+
+/** TODO: don't hardcode here! */
+export default DropTarget("ALUMN", groupTarget, collect)(Group);
