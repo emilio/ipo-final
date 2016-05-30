@@ -14,11 +14,12 @@
   },
   "keywords": [],
   "author": "Emilio Cobos Álvarez (https://emiliocobos.me)",
-  "license": "GPLv3",
+  "license": "GPL-3.0+",
   "dependencies": {
     "babel-runtime": "^6.3.19",
     "modernizr-webpack-plugin": "^1.0.5",
     "react": "^0.14.5",
+    "react-a11y": "^0.3.3",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dnd-touch-backend": "^0.2.7",

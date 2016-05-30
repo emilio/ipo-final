@@ -68,7 +68,7 @@ class GroupList extends Component {
         <input className="group-list-searcher"
                placeholder="Nombre o DNI"
                type="text"
-               onChange={this.handleSearch.bind(this)} />
+               onChange={this.handleSearch.bind(this)} aria-label="Búsqueda" />
         <div className="group-list-groups">
           {groups}
         </div>

@@ -48,10 +48,6 @@ AlumnState.propTypes = {
  * it's trivial to determine the state.
  */
 class Alumn extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     // TODO: This dummy image url is just to generate dummy images and should
     // use this.props.imageUrl
@@ -68,7 +64,7 @@ class Alumn extends Component {
     let extraClassName = isDragging ? "alumn--dragging" : "";
     return connectDragPreview(connectDragSource(
       <div className={"alumn " + extraClassName}>
-        <img src={imageUrl} className="alumn-avatar" />
+        <img src={imageUrl} alt={"Avatar de " + name} className="alumn-avatar" />
         <h3 className="alumn-name">{name}</h3>
         <span className="alumn-id">{id}</span>
         <AlumnState wanted={wantedGroupId} current={groupId} />

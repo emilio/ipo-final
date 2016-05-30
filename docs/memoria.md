@@ -99,9 +99,9 @@ clara. No tenía sentido realizar un proceso exhaustivo para reafirmar
 las necesidades de la gente de hallar un sistema de cambio de personas más
 amigable y productivo[^oh-well-potentially].
 
-[^oh-well-potentially]: Bueno, potencialmente también se podría haber demostrado
-que el enunciado estaba equivocado, pero eso sería (aparte de muy improbable) ir
-contra lo evidente.
+[^oh-well-potentially]: Bueno, potencialmente también se podría haber dado el
+caso de que el enunciado estuviera equivocado, pero eso sería ir contra lo
+evidente.
 
 # Proceso de diseño de la interfaz
 
@@ -198,10 +198,22 @@ La respuesta fue clara, y cito textualmente:
 Durante el diseño de esta interfaz se han tomado algunas consideraciones
 importantes relacionadas con el diseño.
 
-## Consistencia
+## Tipografía
+
+Se ha usado la tipografía Fira Sans, en su version *light* para los títulos
+y nombres de grupo, y en su versión normal para el resto de elementos de la
+página, lo que le da un aspecto consistente a la vez que ligero.
+
+## Escalabilidad
 
 El hecho de que funcionara para cualquier número de grupos y alumnos es
-extremadamente importante. Para ello se usó FlexBox @css-flexbox.
+extremadamente importante. Para ello se usó FlexBox @css-flexbox, que permite
+que los elementos fluyan si sobrepasan el ancho, pero mantienen los de la misma
+fila con el mismo alto.
+
+Si el alto número de alumnos o grupos fuera un problema mayor del previsto, se
+podría considerar hacer el interior del recuadro del grupo scrollable
+verticalmente.
 
 ## Accesibilidad desde todo tipo de dispositivos
 
@@ -227,6 +239,16 @@ para que el navegador no añada un delay artificial cuando se hace *drag and
 drop* en los dispositivos móviles @mozhacks-touch-events, se ha elegido
 mantener la capacidad de hacer zoom, pensando sobre todo en usuarios que
 pudieran tener problemas de visión.
+
+## Accesibilidad para todo tipo de personas
+
+Se ha usado el módulo `react-a11y` para emitir errores si alguno de los
+elementos básicos de accesibilidad se incumplía.
+
+Esto sirvió en su momento para cazar un par de errores de accesibilidad de forma
+automática, como etiquetas `<img>` sin atributo `alt`, y controles de formulario
+sin `label`, haciendo un poco más usable la interfaz para la gente que usa
+lectores de pantalla.
 
 ## Colores consistentes y fáciles de reconocer
 
@@ -257,6 +279,6 @@ puedes dejarlo escalan también.
 
 [^group-screenshot]: Al igual que anteriormente, el cursor no se ve en este
 caso, pero se encuentra sobre el alumno transparente en el grupo resaltado. Ante
-la duda, se recomienda probar la aplicación.
+la duda, se recomienda probar la aplicación directamente.
 
 # Bibliografía
