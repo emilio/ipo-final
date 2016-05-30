@@ -92,4 +92,171 @@ Esta interfaz ha sido ideada en un *workflow* similar al que sigue:
     Este proceso podría necesitar ser llevado a varias veces, de ahí la
     necesidad para que esta interfaz sea intuitiva, fácil y rápida de usar.
 
+# Búsqueda de necesidades
+
+La búsqueda de necesidades viene prácticamente explícita en enunciado, y es
+clara. No tenía sentido realizar un proceso exhaustivo para reafirmar
+las necesidades de la gente de hallar un sistema de cambio de personas más
+amigable y productivo[^oh-well-potentially].
+
+[^oh-well-potentially]: Bueno, potencialmente también se podría haber demostrado
+que el enunciado estaba equivocado, pero eso sería (aparte de muy improbable) ir
+contra lo evidente.
+
+# Proceso de diseño de la interfaz
+
+El proceso de diseño inicial de la interfaz fue, tal vez poco sorprendentemente,
+directo. La idea básica en la cabeza del diseñador (es decir, yo), era clara,
+y tener un diseño inicial no costó demasiado.
+
+A partir de ahí, gracias a diferentes pruebas con los usuarios, se consiguió
+llegar al diseño actual.
+
+Se realizaron pruebas con 4 personas diferentes en tres diferentes etapas de
+diseño, todas con la misma introducción de base. Estas pruebas resultaron ser
+determinantes para mejorar la interfaz y validar su uso.
+
+Adicionalmente, uno de ellos comparó el proceso con el proceso equivalente en
+Moodle.
+
+Ninguna de las personas que probaron la aplicación tenía experiencia previa con
+ella, y todas poseían la misma información:
+
+> Este es un sistema de cambio de grupos. Tienes que ponerte en el papel de un
+> profesor organizando un curso. Tu objetivo es conseguir organizar los grupos
+> de tal manera que queden compensados, y de tratar de evitar todos los
+> conflictos de grupos entre los alumnos.
+
+Tras eso, yo observaba al usuario usando la aplicación, obviamente sin revelar
+ninguna información acerca de cómo utilizarla.
+
+Si completaban el primer paso de forma satisfactoria, les pedía lo siguiente:
+
+> Te ha llegado un correo de un alumno que no sabe utilizar el sistema
+> automático de solicitud de cambio de grupo.
+>
+> Su DNI es el 70912324-N, y su nombre es Emilio. ¿Podrías moverlo al grupo $X$?
+
+Donde $X$ era el grupo con menos alumnos donde no estuviera el alumno
+correspondiente.
+
+La idea de esta pregunta era valorar la utilidad de la búsqueda.
+
+A continuación haremos un pequeño repaso de las diferentes experiencias que
+tuvieron los usuarios, y las lecciones aprendidas de ellas.
+
+## Primer diseño y prueba funcional
+
+El primer diseño era algo rudo, he de reconocerlo. Tenía varias carencias
+a nivel de facilidad de uso.
+
+De hecho, el primer usuario entrevistado no supo reordenar los grupos, porque no
+aparecía ninguna indicación con el cursor de que se pudieran arrastrar los
+miembros de los grupos, lo cual fue un fallo enorme por mi parte.
+
+## Segunda iteración sobre el diseño
+
+En la segunda iteración sobre el diseño se añadió el cursor con la mano, y los
+efectos `:hover` y de drag. Esto hizo que el segundo usuario consiguiera hacer
+los grupos satisfactoriamente.
+
+En esta interfaz, lo que ahora es una "etiqueta" con el grupo deseado y un
+color, era un punto de color que al pasar el ratón por encima mostraba el grupo.
+
+El usuario no supo interpretar esto, y por lo tanto los conflictos entre grupos
+quedaron sin resolver.
+
+Sí que usó, no obstante, la búsqueda adecuadamente, si bien dijo que le gustaría
+ver el número de alumnos total del grupo aún filtrando.
+
+## Tercera interacción sobre el diseño
+
+La tercera interacción fue mucho más aceptable, a estas alturas ya se habían
+incluido los cambios provocados por las anteriores iteraciones, aparte de
+colores [estándar](https://flatuicolors.com/) en el diseño de interfaces para
+mostrar grupos no balanceados.
+
+La interacción fue rápida y sin ninguna objeción[^no-objections-except], que
+consiguió realizar las tareas solicitadas sin ninguna ayuda en menos de un
+minuto por tarea, algo que considero todo un logro.
+
+[^no-objections-except]: Salvo que los datos no se quedaban guardados cuando
+recargaba, algo que quedaba fuera de lugar para esta práctica.
+
+### Comparativa con Moodle
+
+Tras esto se pidió a la entrevistada que hiciera un cambio de grupos similar con
+una versión estándar de Moodle (inicialmente montada para la asignatura de
+administración de sistemas).
+
+La respuesta fue clara, y cito textualmente:
+
+> No hay color, es que la versión de Moodle es una chusta.
+
+# Aspectos y consideraciones tomadas a la hora de diseñar la interfaz
+
+Durante el diseño de esta interfaz se han tomado algunas consideraciones
+importantes relacionadas con el diseño.
+
+## Consistencia
+
+El hecho de que funcionara para cualquier número de grupos y alumnos es
+extremadamente importante. Para ello se usó FlexBox @css-flexbox.
+
+## Accesibilidad desde todo tipo de dispositivos
+
+La página funciona bien independientemente de la resolución de pantalla y de si
+se usa un ratón o un dedo para manejarlo. De hecho, se usa un back-end diferente
+para la biblioteca de *drag and drop* si el navegador soporta touch-events o no:
+
+```js
+let selectedBackend = Html5Backend;
+if (window.Modernizr && window.Modernizr.touchevents)
+  selectedBackend = TouchBackend({ enableMouseEvents: true });
+```
+
+Sobre el tamaño de la pantalla, gracias a FlexBox no ha hecho falta nada más que
+usar la etiqueta `<meta name="viewport">`.
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+Nótese que aunque se hubiera podido utilizar el fragmento `user-scalable=no`,
+para que el navegador no añada un delay artificial cuando se hace *drag and
+drop* en los dispositivos móviles @mozhacks-touch-events, se ha elegido
+mantener la capacidad de hacer zoom, pensando sobre todo en usuarios que
+pudieran tener problemas de visión.
+
+## Colores consistentes y fáciles de reconocer
+
+Casi todos los diferentes estados tanto de un grupo como de un alumno se han
+indicado con colores. Por ejemplo, cuando un grupo no está balanceado se usa un
+color naranja, y cuando está vacío se usa el color rojo.
+
+![Grupo no balanceado con usuario en grupo no deseado](img/group-users-ui-colors.png)
+
+## Interacciones marcadas claramente
+
+Todos los elementos que son susceptibles de interacción son marcados al paso del
+ratón de una manera u otra. Este era uno de los problemas principals que se
+encontraron cuando se probó con usuarios.
+
+Así, por ejemplo, los elementos que se pueden arrastrar son marcados con un
+cursor específico y son mínimamente escalados al pasar el ratón.
+
+![Alumno arrastrable resaltado[^alumn-screenshot]](img/draggable-alumn.png)
+
+[^alumn-screenshot]: Nótese que el cursor en la captura es el por defecto por
+defecto del software de captura de pantalla.
+
+Otro ejemplo de esto es que cuando estás arrastrando un alumno, los grupos donde
+puedes dejarlo escalan también.
+
+![Grupo donde se puede dejar un alumno[^group-screenshot]](img/droppable-group.png)
+
+[^group-screenshot]: Al igual que anteriormente, el cursor no se ve en este
+caso, pero se encuentra sobre el alumno transparente en el grupo resaltado. Ante
+la duda, se recomienda probar la aplicación.
+
 # Bibliografía
