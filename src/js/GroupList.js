@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Group from './Group';
 import GroupManager from './GroupManager';
 import 'css/group-list';
@@ -13,10 +13,10 @@ import AlumnPreview from './DragLayer';
  */
 class GroupList extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       groups: [],
-      searchQuery: "",
+      searchQuery: ''
     };
   }
 
@@ -25,8 +25,8 @@ class GroupList extends Component {
     if (this.state.searchQuery !== value) {
       this.setState({
         groups: this.state.groups,
-        searchQuery: value,
-      })
+        searchQuery: value
+      });
     }
   }
 
@@ -34,9 +34,9 @@ class GroupList extends Component {
     GroupManager.onChange(groups => {
       this.setState({
         groups: groups,
-        searchQuery: this.state.searchQuery,
-      })
-    })
+        searchQuery: this.state.searchQuery
+      });
+    });
     // TODO: does this.props.url make any sense now
     // GroupManager is a singleton? Probably not but huh...
     GroupManager.init(this.props.url);
@@ -45,8 +45,9 @@ class GroupList extends Component {
   render() {
     let query = this.state.searchQuery;
 
-    if (query)
+    if (query) {
       query = query.toLowerCase();
+    }
 
     let averageGroupLength = this.state.groups
                                        .reduce((sum, group) => sum + group.alumns.length, 0) / this.state.groups.length;
@@ -60,16 +61,22 @@ class GroupList extends Component {
                  alumn.name.toLowerCase().indexOf(query) !== -1;
         });
       }
-      return <Group key={group.id} id={group.id} alumns={alumns} unfilteredAlumns={group.alumns} averageGroupLength={averageGroupLength}></Group>;
+      return (
+          <Group key={group.id}
+                 id={group.id}
+                 alumns={alumns}
+                 unfilteredAlumns={group.alumns}
+                 averageGroupLength={averageGroupLength} />
+      );
     });
 
     return (
-      <div className="group-list">
-        <input className="group-list-searcher"
-               placeholder="Nombre o DNI"
-               type="text"
-               onChange={this.handleSearch.bind(this)} aria-label="Búsqueda" />
-        <div className="group-list-groups">
+      <div className='group-list'>
+        <input className='group-list-searcher'
+               placeholder='Nombre o DNI'
+               type='text'
+               onChange={this.handleSearch.bind(this)} aria-label='Búsqueda' />
+        <div className='group-list-groups'>
           {groups}
         </div>
         <AlumnPreview />
@@ -78,8 +85,13 @@ class GroupList extends Component {
   }
 }
 
+GroupList.propTypes = {
+  url: PropTypes.string.isRequired
+};
+
 let selectedBackend = Html5Backend;
-if (window.Modernizr && window.Modernizr.touchevents)
+if (window.Modernizr && window.Modernizr.touchevents) {
   selectedBackend = TouchBackend({ enableMouseEvents: true });
+}
 
 export default DragDropContext(selectedBackend)(GroupList);

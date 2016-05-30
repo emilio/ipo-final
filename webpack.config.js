@@ -40,16 +40,16 @@
  * that is actually delivered to the end user browser.
  */
 
-const autoprefixer = require('autoprefixer')
+const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 const sassLoaders = [
   'css-loader',
   'postcss-loader',
   'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, './src')
-]
+];
 
 
 module.exports = {
@@ -89,7 +89,7 @@ module.exports = {
     loaders: [
       {
         test: /\.sass$/,
-        loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!')),
+        loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
       },
       {
         test: /\.jsx?$/,

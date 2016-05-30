@@ -12,15 +12,15 @@ const AVATAR_WIDTH_PX = 125;
  */
 class AlumnState extends Component {
   render() {
-    let assignedState = "unknown";
+    let assignedState = 'unknown';
 
     if (this.props.wanted)
-      assignedState = this.props.wanted == this.props.current ? "assigned" :
-                                                                "unassigned";
+      assignedState = this.props.wanted === this.props.current ? 'assigned' :
+                                                                 'unassigned';
 
     return (
       <span data-wanted={this.props.wanted}
-            className={"alumn-state alumn-state--" + assignedState}>
+            className={'alumn-state alumn-state--' + assignedState}>
         {this.props.wanted}
       </span>
     );
@@ -51,7 +51,7 @@ class Alumn extends Component {
   render() {
     // TODO: This dummy image url is just to generate dummy images and should
     // use this.props.imageUrl
-    let imageUrl = "https://api.adorable.io/avatars/" + AVATAR_WIDTH_PX + "/" + encodeURIComponent(this.props.name);
+    let imageUrl = 'https://api.adorable.io/avatars/' + AVATAR_WIDTH_PX + '/' + encodeURIComponent(this.props.name);
 
     const { name,
             id,
@@ -61,12 +61,12 @@ class Alumn extends Component {
             groupId,
             wantedGroupId } = this.props;
 
-    let extraClassName = isDragging ? "alumn--dragging" : "";
+    let extraClassName = isDragging ? 'alumn--dragging' : '';
     return connectDragPreview(connectDragSource(
-      <div className={"alumn " + extraClassName}>
-        <img src={imageUrl} alt={"Avatar de " + name} className="alumn-avatar" />
-        <h3 className="alumn-name">{name}</h3>
-        <span className="alumn-id">{id}</span>
+      <div className={'alumn ' + extraClassName}>
+        <img src={imageUrl} alt={'Avatar de ' + name} className='alumn-avatar' />
+        <h3 className='alumn-name'>{name}</h3>
+        <span className='alumn-id'>{id}</span>
         <AlumnState wanted={wantedGroupId} current={groupId} />
       </div>
     ));
@@ -109,4 +109,4 @@ function collect(connect, monitor) {
   }
 }
 
-export default DragSource("ALUMN", alumnSource, collect)(Alumn);
+export default DragSource('ALUMN', alumnSource, collect)(Alumn);

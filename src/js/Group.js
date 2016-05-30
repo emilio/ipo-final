@@ -29,7 +29,7 @@ class Group extends Component {
 
     if (this.props.unfilteredAlumns) {
       totalCount = this.props.unfilteredAlumns.length;
-      filtered = filteredCount != totalCount;
+      filtered = filteredCount !== totalCount;
     }
 
     let canDrop = this.props.canDrop;
@@ -39,11 +39,11 @@ class Group extends Component {
     let ratio = this.props.unfilteredAlumns.length / this.props.averageGroupLength;
 
     let state = "decent";
-    if (ratio == 1)
+    if (ratio === 1)
       state = "optimal";
     if (ratio > 1.3 || ratio < 0.66)
       state = "warning";
-    if (ratio == 0)
+    if (ratio === 0)
       state = "danger";
 
     return this.props.connectDropTarget(
@@ -78,7 +78,7 @@ Group.propTypes = {
 const groupTarget = {
   canDrop(props, monitor) {
     // TODO: validate something like max group size?
-    return props.id != monitor.getItem().groupId;
+    return props.id !== monitor.getItem().groupId;
   },
 
   drop(props, monitor) {
