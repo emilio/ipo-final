@@ -42,7 +42,21 @@
         {
           "name": "Manuela Tándem Jaque",
           "id": "54350030-P",
-          "wantedGroupId": "PB-3"
+          "wantedGroupId": "PB-1"
+        },
+        {
+          "name": "Jesús Llorente TieneUnNombreMuyLargo",
+          "id": "90659943-S"
+        },
+        {
+          "name": "Helena Felipa Hernández",
+          "id": "43534224-P",
+          "wantedGroupId": "PB-2"
+        },
+        {
+          "name": "Raquel Martín Meléndez",
+          "id": "54359930-P",
+          "wantedGroupId": "PB-1"
         }
       ]
     }
