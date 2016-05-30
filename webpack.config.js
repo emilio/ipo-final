@@ -40,7 +40,6 @@
  * that is actually delivered to the end user browser.
  */
 
-/* eslint-disable no-var */
 const autoprefixer = require('autoprefixer')
 const webpack = require('webpack');
 const path = require('path');

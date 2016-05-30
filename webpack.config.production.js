@@ -38,22 +38,38 @@
  * that is actually delivered to the end user browser.
  */
 
-/* eslint-disable no-var */
-var webpack = require('webpack');
-var path = require('path');
+const autoprefixer = require('autoprefixer')
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
+const sassLoaders = [
+  'css-loader',
+  'postcss-loader',
+  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, './src')
+]
 
 module.exports = {
-  entry: './scripts/index',
+  entry: './src/index',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.sass'],
+    root: [path.join(__dirname, './src')]
   },
   devtool: 'source-map',
   plugins: [
+    new ModernizrWebpackPlugin({
+      options: ['setClasses'],
+      'feature-detects': [
+        'input',
+        'touchevents'
+      ]
+    }),
+    new ExtractTextPlugin('[name].css'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -66,12 +82,21 @@ module.exports = {
       }
     })
   ],
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 versions']
+    })
+  ],
   module: {
     loaders: [
       {
+        test: /\.sass$/,
+        loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!')),
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'scripts')
+        include: path.join(__dirname, 'src')
       }
     ]
   }

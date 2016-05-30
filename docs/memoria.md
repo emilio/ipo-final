@@ -4,7 +4,7 @@ subtitle: Práctica final -- Interacción Persona Ordenador
 date: 30 de Mayo de 2016
 toc: true
 fontsize: 11pt
-csl: acm-sig-proceedings.csl
+csl: acm-sigchi-proceedings.csl
 lang: es
 numbersections: true
 babel-lang: spanish
@@ -98,6 +98,10 @@ La búsqueda de necesidades viene prácticamente explícita en enunciado, y es
 clara. No tenía sentido realizar un proceso exhaustivo para reafirmar
 las necesidades de la gente de hallar un sistema de cambio de personas más
 amigable y productivo[^oh-well-potentially].
+
+Aparte, la interfaz diseñada estaba explícitamente orientada a profesores, lo
+que hace que sea, cuanto menos, complicado tomar contacto con ellos, más con las
+limitaciones de tiempo que ha habido.
 
 [^oh-well-potentially]: Bueno, potencialmente también se podría haber dado el
 caso de que el enunciado estuviera equivocado, pero eso sería ir contra lo
@@ -280,5 +284,41 @@ puedes dejarlo escalan también.
 [^group-screenshot]: Al igual que anteriormente, el cursor no se ve en este
 caso, pero se encuentra sobre el alumno transparente en el grupo resaltado. Ante
 la duda, se recomienda probar la aplicación directamente.
+
+# Conclusiones
+
+En esta práctica se ha llevado a cabo el diseño de una interfaz usando los
+principios del UCD.
+
+Lo más remarcable de esta práctica en lo que a mi respecta, ha sido la extrema
+utilidad del proceso de evaluación con los usuarios.
+
+Concretamente, **a mi en la primera iteración me parecía un sistema perfectamente
+claro y fácil de usar. Sin embargo, el primer usuario que lo probó ni siquiera
+supo que podía arrastrar los usuarios**.
+
+Sirva esta reflexión como reconocimiento personal a la importancia de las
+técnicas relacionadas con el diseño centrado en el usuario.
+
+Me hubiera gustado contar con más tiempo para haber podido hacer una evaluación
+más extensa, y una búsqueda de necesidades muchísimo más en profundidad, no
+obstante los exámenes apremian.
+
+# Adjuntos
+
+Aparte de las imágenes en esta memoria, se adjunta todo el código fuente, y un
+vídeo con un ejemplo de uso si Moodle lo permite.
+
+Para poner a ejecutar la aplicación en local, sólo hay que ejecutar:
+
+```
+$ npm install
+$ npm start
+```
+
+Y abrir el navegador en la URL `http://localhost:5000`.
+
+No obstante, hay una versión online en la dirección
+`https://emiliocobos.net/ipo`.
 
 # Bibliografía
