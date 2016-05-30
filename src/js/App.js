@@ -45,7 +45,7 @@ export default class App extends Component {
     return (
       <main>
         <Header />
-        <GroupList url="/static/groups.json"/>
+        <GroupList url="static/groups.json"/>
         <Footer />
       </main>
     );
