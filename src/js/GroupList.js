@@ -48,6 +48,10 @@ class GroupList extends Component {
     if (query)
       query = query.toLowerCase();
 
+    let averageGroupLength = this.state.groups
+                                       .reduce((sum, group) => sum + group.alumns.length, 0) / this.state.groups.length;
+
+
     let groups = this.state.groups.map(group => {
       let alumns = group.alumns;
       if (query) {
@@ -56,7 +60,7 @@ class GroupList extends Component {
                  alumn.name.toLowerCase().indexOf(query) !== -1;
         });
       }
-      return <Group key={group.id} id={group.id} alumns={alumns} unfilteredAlumns={group.alumns}></Group>;
+      return <Group key={group.id} id={group.id} alumns={alumns} unfilteredAlumns={group.alumns} averageGroupLength={averageGroupLength}></Group>;
     });
 
     return (

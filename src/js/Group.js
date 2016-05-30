@@ -36,13 +36,21 @@ class Group extends Component {
     let isOver = this.props.isOver;
     let extraClassName = canDrop && isOver ? "group--droppable" : "";
 
+    let ratio = this.props.unfilteredAlumns.length / this.props.averageGroupLength;
+
+    let state = "decent";
+    if (ratio == 1)
+      state = "optimal";
+    if (ratio > 1.3 || ratio < 0.66)
+      state = "warning";
+    if (ratio == 0)
+      state = "danger";
+
     return this.props.connectDropTarget(
       <div className={"group " + extraClassName}>
         <header className="group-header">
-          <span className="group-alumn-count"
-                data-filtered={filtered}
-                data-total-count={totalCount}
-                data-filtered-count={filteredCount}>
+          <span className={"group-alumn-count group-alumn-count--" + state}
+                data-filtered={filtered}>
             <span className="group-alumn-count-filtered">{filteredCount}</span>
             <span className="group-alumn-count-separator"></span>
             <span className="group-alumn-count-total">{totalCount}</span>
@@ -61,6 +69,7 @@ Group.propTypes = {
   id: PropTypes.any.isRequired,
   alumns: PropTypes.array.isRequired,
   unfilteredAlumns: PropTypes.array,
+  averageGroupLength: PropTypes.number.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   canDrop: PropTypes.bool.isRequired

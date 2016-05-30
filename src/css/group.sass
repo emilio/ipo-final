@@ -44,10 +44,13 @@
     .group-alumn-count-total,
     .group-alumn-count-separator
       opacity: .7
-  &[data-filtered-count="0"]
-    background-color: $soft-red
-  &[data-total-count="0"]
-    background-color: #f00
+
+.group-alumn-count--danger
+  background-color: $soft-red
+.group-alumn-count--warning
+  background-color: $soft-orange
+.group-alumn-count--optimal
+  background-color: $soft-green
 
 .group-title
   font-size: 1.4em

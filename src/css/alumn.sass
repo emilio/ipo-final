@@ -50,30 +50,15 @@ $avatar-width: 35px
   bottom: .5em
   right: .5em
 
-.alumn-state::before
-  content: attr(data-wanted)
-  display: block
-  position: absolute
-  bottom: 0
-  background: rgba(black, .6)
-  color: white
-  padding: .3em .5em
-  border-radius: 5px
-  right: -.5em
-  opacity: 0
-  pointer-events: none
-
-.alumn-state:hover::before
-  opacity: 1
-  bottom: 110%
-  transition: opacity .3s ease, bottom .3s ease
 
 .alumn-state--unassigned,
 .alumn-state--assigned
-  width: 15px
-  height: 15px
-  border-radius: 8px
-  display: block
+  display: block;
+  color: white;
+  font-weight: 600;
+  font-size: .7em;
+  padding: .2em .5em;
+  border-radius: 3px;
 .alumn-state--unassigned
   background: $soft-red
 .alumn-state--assigned

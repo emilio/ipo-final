@@ -21,6 +21,7 @@ class AlumnState extends Component {
     return (
       <span data-wanted={this.props.wanted}
             className={"alumn-state alumn-state--" + assignedState}>
+        {this.props.wanted}
       </span>
     );
   }
